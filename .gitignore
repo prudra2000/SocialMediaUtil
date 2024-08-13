@@ -34,3 +34,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+xAPI="psahGv9DMwzETzhHcrnLvgizG"
+xAPISec="B5u6udonY73cL7PFGBQh1aZsEp5DiKDncyJx37GtCREoUsUrZd"
