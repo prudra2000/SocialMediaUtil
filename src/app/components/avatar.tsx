@@ -16,8 +16,8 @@ const Avatar: React.FC<AvatarProps> = ({ src, alt, border = false }) => {
                   w-12 h-12 
                   sm:w-16 sm:h-16 
                   md:w-20 md:h-20 
-                  lg:w-24 lg:h-24 
-                  xl:w-32 xl:h-32 
+                  lg:w-20 lg:h-20 
+                  xl:w-20 xl:h-20 
                   ${borderClasses}`}
     >
       <Image
