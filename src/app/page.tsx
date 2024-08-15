@@ -38,7 +38,7 @@ export default function Home() {
   const [tweetContent, settweetContent] = useState("");
   const [verified, setVerified] = useState(false);
   const [platfromType, setPlatfromType] = useState("");
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [deviceType, setDeviceType] = useState("");
   const [date, setDate] = React.useState<Date>();
 
   const divRef = useRef<HTMLDivElement>(null);
@@ -50,7 +50,7 @@ export default function Home() {
     const link = download(dataUrl, "exported-div.png");
   };
   return (
-    <main className="flex min-h-screen flex-col items-center py-24 px-20">
+    <main className="flex min-h-screen flex-col items-center py-24 px-5 md:px-10 xl:px-20 2xl:px-20">
       <div className="grid grid-cols-2 gap-4 mb-4">
         <div className="flex gap-3">
           <Input
@@ -119,7 +119,7 @@ export default function Home() {
             </SelectItem>
           </SelectContent>
         </Select>
-        <Select>
+        <Select onValueChange={(value) => setDeviceType(value)}>
           <SelectTrigger className="">
             <SelectValue placeholder="Select Device" />
           </SelectTrigger>
@@ -140,7 +140,7 @@ export default function Home() {
         </Select>
       </div>
       <div ref={divRef} className={`py-10 `}>
-        <Card>
+        <Card device={deviceType}>
           <CardHeader
             name={name}
             username={username}
@@ -148,7 +148,7 @@ export default function Home() {
             platfromIcon={platfromType}
             verified={verified}
           />
-          <CardContent tweetContent={tweetContent} />
+          <CardContent tweetContent={tweetContent} device={deviceType} />
           <hr className="px-6 pt-2" />
           <CardFooter>{date && <p>{date.toDateString()}</p>}</CardFooter>
         </Card>

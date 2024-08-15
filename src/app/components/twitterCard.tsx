@@ -10,9 +10,9 @@ import { BsFillQuestionCircleFill } from "react-icons/bs";
 
 const Card = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div ref={ref} className="rounded-2xl border border-slate-200 bg-white shadow-md" {...props} />
+  React.HTMLAttributes<HTMLDivElement> & { device: string }
+>(({ className, device, ...props }, ref) => (
+  <div ref={ref} className={`rounded-2xl border border-slate-200 bg-white shadow-md ${device === 'mobile' ? 'w-96': device === 'desktop' ? 'w-fill' : ''}`} {...props} />
 ));
 Card.displayName = "Card";
 
@@ -54,14 +54,14 @@ CardHeader.displayName = "CardHeader";
 
 const CardContent = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & { tweetContent: string }
->(({ className, tweetContent, ...props }, ref) => (
+  React.HTMLAttributes<HTMLDivElement> & { tweetContent: string } & { device: string }
+>(({ className, tweetContent, device, ...props }, ref) => (
   <div
     ref={ref}
     className="px-10 pb-6 text-xs md:text-sm xl:text-lg 2xl:text-xl"
     {...props}
   >
-    <p>{tweetContent}</p>
+    <p className={`${device === 'mobile' ? 'text-xs': device === 'desktop' ? '' : ''}`}>{tweetContent}</p>
   </div>
 ));
 CardContent.displayName = "CardContent";
