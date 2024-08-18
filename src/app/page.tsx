@@ -30,10 +30,10 @@ import { BsFillThreadsFill } from "react-icons/bs";
 import { IoDesktopOutline } from "react-icons/io5";
 import { IoPhonePortraitOutline } from "react-icons/io5";
 import { FaRegCalendarAlt } from "react-icons/fa";
-
-
+import { FaRegClock } from "react-icons/fa";
 import { Slider } from "@/components/ui/slider";
 import TimePicker from "./components/timePicker";
+import { Calendar as CalendarIcon } from "lucide-react";
 
 export default function Home() {
   const [name, setName] = useState("");
@@ -45,10 +45,12 @@ export default function Home() {
   const [deviceType, setDeviceType] = useState("");
   const [date, setDate] = React.useState<Date>();
   const [cardWidth, setCardWidth] = useState(300); // Set initial width
-  const [sliderMax, setSliderMax] = useState(300); // Set initial max width
+  const [sliderMax, setSliderMax] = useState(window.innerWidth || 1280); // Set initial max width
   const cardRef = useRef<HTMLDivElement>(null);
   const [quote, setQuote] = useState("");
   const [quoteAuthor, setquoteAuthor] = useState("");
+  const [time, setTime] = useState<string>(""); // Change to string type
+
   useEffect(() => {
     setSliderMax(window.innerWidth); // Set max width to the width of the screen
   }, []); // Run once on mount
@@ -91,7 +93,7 @@ export default function Home() {
 
   useEffect(() => {
     const fetchQuotes = async () => {
-      const response = await fetch('/sampleData.json');
+      const response = await fetch("/sampleData.json");
       const data = await response.json();
       if (data.quotes && data.quotes.length > 0) {
         const randomIndex = Math.floor(Math.random() * data.quotes.length); // Get a random index
@@ -155,7 +157,20 @@ export default function Home() {
           className="p-2 border rounded col-span-2"
         />
         <DatePicker date={date} setDate={setDate} />
-        <TimePicker />
+        <div>
+          <TimePicker
+            getTime={setTime}
+            button={
+              <Button
+                variant={"outline"}
+                className="justify-start text-left font-normal text-muted-foreground w-full"
+              >
+                <CalendarIcon className="mr-2 h-4 w-4" />
+                <span>Pick a date</span>
+              </Button>
+            }
+          />
+        </div>
 
         <Select onValueChange={(value) => setPlatfromType(value)}>
           <SelectTrigger className="">
@@ -227,17 +242,28 @@ export default function Home() {
           /> */}
           <CardHeader
             name={name || quoteAuthor}
-            username={username || quoteAuthor.toLowerCase().replace(/\s+/g, '.')}
+            username={
+              username || quoteAuthor.toLowerCase().replace(/\s+/g, ".")
+            }
             avatarURL={avatarURL}
             platfromIcon={platfromType}
             verified={verified}
           />
           <hr className="px-6 pt-2" />
-          <CardContent tweetContent={tweetContent || quote} device={deviceType} />
+          <CardContent
+            tweetContent={tweetContent || quote}
+            device={deviceType}
+          />
           <hr className="px-6 pt-2" />
           <CardFooter className="">
-            {date && <FaRegCalendarAlt className="mr-1"/>}
-            {date && <p>{date.toDateString()}</p>}
+            <div className="flex space-x-1 items-center">
+              {time && <FaRegClock />}
+              <p>{time}</p>
+            </div>
+            <div className="flex space-x-1 items-center">
+              {date && <FaRegCalendarAlt />}
+              {date && <p>{date.toDateString()}</p>}
+            </div>
           </CardFooter>
         </Card>
       </div>
