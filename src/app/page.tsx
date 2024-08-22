@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import React, { useRef } from "react";
 import { toPng } from "html-to-image";
 import download from "downloadjs";
-import { DraggableCore } from "react-draggable";
 import {
   Card,
   CardHeader,
@@ -27,8 +26,6 @@ import { MdDownloadForOffline } from "react-icons/md";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaFacebookF } from "react-icons/fa";
 import { BsFillThreadsFill } from "react-icons/bs";
-import { IoDesktopOutline } from "react-icons/io5";
-import { IoPhonePortraitOutline } from "react-icons/io5";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { FaRegClock } from "react-icons/fa";
 import { Slider } from "@/components/ui/slider";
@@ -197,25 +194,6 @@ export default function Home() {
             </SelectItem>
           </SelectContent>
         </Select>
-        {/* <Select onValueChange={(value) => setDeviceType(value)}>
-          <SelectTrigger className="">
-            <SelectValue placeholder="Select Device" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="mobile">
-              <div className="flex flex-row items-center gap-2">
-                <IoPhonePortraitOutline />
-                <h1>Mobile</h1>
-              </div>
-            </SelectItem>
-            <SelectItem value="desktop">
-              <div className="flex flex-row items-center gap-2">
-                <IoDesktopOutline />
-                <h1>Desktop</h1>
-              </div>
-            </SelectItem>
-          </SelectContent>
-        </Select> */}
         <div className="flex flex-col space-y-2 justify-center col-span-2">
           <p className="text-sm">Card Width:</p>
           <Slider
@@ -230,16 +208,6 @@ export default function Home() {
       </div>
       <div ref={divRef} className={`py-10 `} style={{ width: cardWidth }}>
         <Card ref={cardRef} device={deviceType} style={{ width: cardWidth }}>
-          {/* <div
-            onMouseDown={(e) => handleMouseDown(e, false)}
-            className="cursor-ew-resize"
-            style={{
-              width: "10px",
-              background: "black",
-              position: "absolute",
-              height: cardRef.current ? `${cardRef.current.clientHeight}px` : "10%",
-            }}
-          /> */}
           <CardHeader
             name={name || quoteAuthor}
             username={
